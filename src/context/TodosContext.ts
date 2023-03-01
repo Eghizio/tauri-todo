@@ -3,6 +3,8 @@ import { Todo } from "../model";
 
 interface TodosContextValue {
   todos: Todo[];
+  isDoneFilterEnabled: boolean;
+  toggleDoneFilter: () => void;
   addTodo: (name: string) => void;
   toggleTodo: (id: string) => void;
   editTodo: (todo: Todo) => void;

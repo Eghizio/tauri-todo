@@ -8,12 +8,15 @@ interface Props {
 
 export const Item = ({ todo }: Props) => {
   const { id, name, done, priority } = todo;
-  const { toggleTodo } = useTodos();
+  const { toggleTodo, isDoneFilterEnabled } = useTodos();
   const style = {
     item: done ? "item done" : "item",
     name: done ? "name done" : "name",
     prio: `priority ${priority.toLowerCase()}`,
   };
+
+  const isVisible = !isDoneFilterEnabled || !done;
+  if(!isVisible) return null;
 
   return (
     <li className={style.item}>

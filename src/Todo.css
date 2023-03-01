@@ -1,7 +1,10 @@
-.app {
+:root {
   --color-orange: #FFC131;
   --color-blue: #24C8DB;
   --color-red: crimson;
+}
+
+.app {
   display: flex;
   flex-direction: column;
   align-items: center;

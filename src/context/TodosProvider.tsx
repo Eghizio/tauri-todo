@@ -2,6 +2,7 @@ import { ReactNode, useState } from "react";
 import { TodosContext } from "./TodosContext";
 import { createTodo, Todo } from "../model";
 import { toast } from "sonner";
+import { useDisclosure } from "../hooks/useDisclosure";
 
 const exampleTodos: Todo[] = [
   { ...createTodo("Make an app for Mac to move all windows to second screen"), priority: "HIGH" },
@@ -13,6 +14,10 @@ const exampleTodos: Todo[] = [
 
 export const TodosProvider = ({ children }: { children: ReactNode }) => {
   const [todos, setTodos] = useState<Todo[]>(exampleTodos);
+  const { isOpen: isDoneFilterEnabled, toggle: toggleDoneFilter } = useDisclosure(false);
+
+  // const filteredTodos = todos.filter(({done}) => !isDoneFilterEnabled || !done);
+  const filteredTodos = todos;
 
   const addTodo = (name: string) => {
     const todo = createTodo(name);
@@ -30,7 +35,7 @@ export const TodosProvider = ({ children }: { children: ReactNode }) => {
   
   const removeTodo = (id: string) => {
     setTodos(prev => prev.filter(t => t.id !== id));
-    toast("Item removed.");
+    toast.error("Item removed.");
   };
 
   const reorderTodos = (startIndex: number, endIndex: number) => {
@@ -42,7 +47,9 @@ export const TodosProvider = ({ children }: { children: ReactNode }) => {
   };
   
   const value = {
-    todos,
+    todos: filteredTodos,
+    isDoneFilterEnabled,
+    toggleDoneFilter,
     addTodo,
     toggleTodo,
     editTodo,

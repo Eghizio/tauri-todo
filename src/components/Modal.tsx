@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { createPortal } from "react-dom";
 
 interface Props {
   isOpen: boolean;
@@ -9,12 +10,12 @@ interface Props {
 export const Modal = ({ isOpen, closeModal, children }: Props) => {
   if(!isOpen) return null;
 
-  return (
+  return createPortal(
     <>
       <div className="backdrop" onClick={closeModal}/>
       <div className="modal">
         {children}
       </div>
     </>
-  );
+  , document.querySelector("#modal-root") as HTMLElement);
 };
