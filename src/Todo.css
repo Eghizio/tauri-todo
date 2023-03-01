@@ -42,10 +42,17 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 16px;
+  /* gap: 16px; this fucks up with the dnd */
+}
+
+.draggable {
+  user-select: none;
 }
 
 .item {
+  /* this is the spacing replacing the gap from .list */
+  margin: 8px 0;
+
   width: 300px;
   min-height: 24px;
 
@@ -62,7 +69,7 @@
   font-family: inherit;
   color: #0f0f0f;
   background-color: #ffffff;
-  transition: border-color 0.25s;
+  transition: border-color 0.5s;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 

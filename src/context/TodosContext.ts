@@ -7,6 +7,7 @@ interface TodosContextValue {
   toggleTodo: (id: string) => void;
   editTodo: (todo: Todo) => void;
   removeTodo: (id: string) => void;
+  reorderTodos: (startIndex: number, endIndex: number) => void
 }
 
 export const TodosContext = createContext<TodosContextValue | undefined>(undefined);

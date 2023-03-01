@@ -6,8 +6,8 @@ import { toast } from "sonner";
 const exampleTodos: Todo[] = [
   { ...createTodo("Make an app for Mac to move all windows to second screen"), priority: "HIGH" },
   { ...createTodo("First todo"), priority: "HIGH" },
-  { ...createTodo("Second todo"), status: "IN_PROGRESS" },
-  { ...createTodo("Third todo"), done: true },
+  { ...createTodo("Second todo"), done: true, },
+  { ...createTodo("Third todo"), status: "IN_PROGRESS" },
   { ...createTodo("Fourth todo here with very long name"), priority: "LOW" },
 ];
 
@@ -32,6 +32,14 @@ export const TodosProvider = ({ children }: { children: ReactNode }) => {
     setTodos(prev => prev.filter(t => t.id !== id));
     toast("Item removed.");
   };
+
+  const reorderTodos = (startIndex: number, endIndex: number) => {
+    setTodos(prev => {
+      const [removed] = prev.splice(startIndex, 1);
+      prev.splice(endIndex, 0, removed);
+      return prev;
+    });
+  };
   
   const value = {
     todos,
@@ -39,6 +47,7 @@ export const TodosProvider = ({ children }: { children: ReactNode }) => {
     toggleTodo,
     editTodo,
     removeTodo,
+    reorderTodos,
   };
 
   return <TodosContext.Provider value={value}>{children}</TodosContext.Provider>

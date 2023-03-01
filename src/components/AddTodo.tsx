@@ -1,16 +1,14 @@
 import { useState } from "react";
+import { useTodos } from "../context/TodosContext";
 
-interface Props {
-  add: (name: string) => void;
-}
-
-export const AddTodo = ({ add }: Props) => {
+export const AddTodo = () => {
+  const { addTodo } = useTodos();
   const [name, setName] = useState("");
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     // TODO: handle empty name // hehe get it? todo for todo app xd
-    add(name);
+    addTodo(name);
     setName("");
   };
 

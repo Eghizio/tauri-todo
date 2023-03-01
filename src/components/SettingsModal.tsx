@@ -15,6 +15,8 @@ export const SettingsModal = ({ todo: { id, name, description, done, priority } 
   const { removeTodo } = useTodos(); 
   // todo add toasts to context ex. on remove
 
+  const emptyChangeHandler = () => {};
+
   return (
     <>
       <button className="btn-icons" onClick={open}>
@@ -33,7 +35,7 @@ export const SettingsModal = ({ todo: { id, name, description, done, priority } 
        
         <div className="modal-body">
           <div className="modal-description">
-            <textarea value={description} placeholder="Description of the task"/>
+            <textarea value={description} onChange={emptyChangeHandler} placeholder="Description of the task"/>
           </div>
 
           <aside className="modal-side">
@@ -57,7 +59,7 @@ export const SettingsModal = ({ todo: { id, name, description, done, priority } 
             </div>
 
             <button>
-              <input type="checkbox" onChange={() => {}} /> Done
+              <input type="checkbox" onChange={emptyChangeHandler} /> Done
             </button>
 
             <div className="last">
